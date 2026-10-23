@@ -218,53 +218,6 @@ body {
   font-size: 16px;
 }
 /* Printed information also stays legible while the card clears its pocket. */
-.envelope-skip,
-.envelope-heading p,
-.envelope-primary {
-  font-size: 14px;
-}
-.envelope-masthead > span:nth-child(2),
-.envelope-heading > .eyebrow,
-.envelope-action-note,
-.envelope-colophon {
-  font-size: 12px;
-  line-height: 1.6;
-  letter-spacing: 0.4px;
-}
-.envelope-masthead > span:nth-child(2) {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  text-align: center;
-}
-.card-kicker,
-.card-place,
-.stationery-address > span {
-  font-size: 12px;
-  letter-spacing: 0.5px;
-}
-.card-date {
-  font-size: 14px;
-  letter-spacing: 0.8px;
-}
-.card-names {
-  flex-direction: row;
-  gap: 9px;
-  font-size: clamp(25px, 3vw, 40px);
-  line-height: 1.1;
-  margin: 12px 0;
-}
-.card-names i {
-  margin: 0;
-  font-size: 0.7em;
-}
-.card-flourish {
-  margin-top: 7px;
-}
-.envelope-colophon {
-  gap: 20px;
-}
 @media (max-width: 1100px) {
   .desktop-nav {
     gap: 14px;
@@ -284,12 +237,6 @@ body {
   }
   .story-layout {
     gap: 7%;
-  }
-  .envelope-masthead > span:nth-child(2) {
-    display: none;
-  }
-  .envelope-colophon {
-    align-items: flex-start;
   }
 }
 @media (max-width: 560px) {
@@ -407,50 +354,6 @@ body {
     font-size: 27px;
     line-height: 1.25;
   }
-  .envelope-heading {
-    padding-inline: 20px;
-  }
-  .envelope-heading > .eyebrow {
-    max-width: 270px;
-    display: block;
-    margin: auto;
-  }
-  .envelope-colophon {
-    flex-direction: column;
-    gap: 6px;
-    align-items: center;
-    text-align: center;
-  }
-  .envelope-colophon > span,
-  .envelope-colophon > span + span {
-    max-width: none;
-    text-align: center;
-  }
-  .stationery-address > span {
-    font-size: 12px;
-  }
-  .stationery-address p {
-    margin-top: 2px;
-  }
-  .card-names {
-    font-size: 25px;
-    gap: 6px;
-    margin: 8px 0;
-  }
-  .card-date {
-    font-size: 12px;
-  }
-  .card-kicker,
-  .card-place {
-    font-size: 12px;
-    letter-spacing: 0;
-  }
-  .card-place {
-    margin-top: 5px;
-  }
-  .card-flourish {
-    display: none;
-  }
 }
 @media (max-width: 360px) {
   .hero-kicker {
@@ -467,20 +370,12 @@ body {
   .radio-card strong {
     font-size: 14px;
   }
-  .card-names {
-    font-size: 24px;
-  }
 }
 .date-main p,
 .centered-heading > p,
 .dress-content p {
   font-size: 16px;
   line-height: 1.8;
-}
-.envelope-action-note {
-  text-align: center;
-  max-width: 290px;
-  margin-inline: auto;
 }
 @media (max-width: 800px) {
   .hero-bottom > span,
@@ -490,196 +385,10 @@ body {
     text-align: left;
   }
 }
-/* Envelope feedback: one short invitation, a quieter address and balanced controls. */
-.envelope-masthead > .monogram {
-  font-size: 54px;
-  line-height: 1.1;
-}
-.envelope-masthead > .monogram > span {
-  font-size: 31px;
-}
-.envelope-heading h1 {
-  margin-block: 12px 0;
-}
-.stationery-address {
-  bottom: 4.5%;
-}
-.stationery-address p {
-  margin: 0;
-}
-.envelope-primary {
-  position: relative;
-  width: fit-content;
-  max-width: calc(100vw - 40px);
-  min-width: 0;
-  padding: 16px 36px;
-  justify-content: center;
-  gap: 0;
-}
-.envelope-primary > span {
-  display: block;
-  text-align: center;
-}
-.envelope-primary > svg {
-  position: absolute;
-  right: 12px;
-  top: 50%;
-  transform: translateY(-50%);
-}
-.envelope-action-note {
-  min-height: 20px;
-}
-.envelope-actions {
-  gap: 12px;
-}
-@media (max-width: 560px) {
-  .envelope-masthead > .monogram {
-    font-size: 46px;
-  }
-  .envelope-masthead > .monogram > span {
-    font-size: 27px;
-  }
-  .envelope-heading {
-    padding-top: 15px;
-  }
-  .stationery-scene {
-    margin-top: 34px;
-    margin-bottom: 20px;
-  }
-  .stationery-address p {
-    font-size: 23px;
-  }
-}
-@media (max-width: 360px) {
-  .stationery-address p {
-    font-size: 21px;
-  }
-}
-@media (max-height: 760px) and (min-width: 561px) {
-  .stationery-scene {
-    margin-top: 18px;
-    margin-bottom: 24px;
-  }
-}
-/* Tactile envelope: cotton paper, an upright seal and a compact framed action. */
-.stationery-scene {
-  width: min(600px, 80vw);
-}
-.stationery-pocket-grain,
-.stationery-flap-face:after,
-.stationery-fold:after,
-.stationery-card:after {
-  background-image: url("/images/stationery-paper.svg");
-  background-size: 256px 256px;
-  opacity: 0.24;
-  mix-blend-mode: multiply;
-}
-.stationery-card:after {
-  opacity: 0.13;
-}
-.stationery-pocket {
-  box-shadow: inset 0 -2px 3px #78613c20;
-}
-.stationery-seal {
-  padding: 0;
-  place-content: normal;
-  place-items: center;
-}
-.seal-inner {
-  display: flex;
-  align-items: baseline;
-  justify-content: center;
-  gap: 0;
-  letter-spacing: -2px;
-  line-height: 1;
-  transform: translate(-1px, -1px);
-  width: max-content;
-}
-.seal-inner i {
-  margin: 0 1px;
-  line-height: 1;
-}
-.envelope-primary {
-  overflow: hidden;
-  border-radius: 8px;
-  border: 1px solid #4d2c35;
-  box-shadow: 0 4px 10px #472d2615;
-  isolation: isolate;
-  transition:
-    background 0.25s,
-    transform 0.25s,
-    box-shadow 0.25s;
-}
-.envelope-primary::before {
-  content: "";
-  position: absolute;
-  inset: 4px;
-  border: 1px solid #eddbc05c;
-  border-radius: 4px;
-  pointer-events: none;
-}
-.envelope-primary::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  background: linear-gradient(
-    110deg,
-    transparent 25%,
-    #fff0cf26 50%,
-    transparent 75%
-  );
-  transform: translateX(-130%);
-  transition: transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
-}
-.envelope-primary:focus-visible {
-  outline: 2px solid #8c6b57;
-  outline-offset: 4px;
-}
-@media (hover: hover) and (pointer: fine) {
-  .envelope-primary:hover:not(:disabled) {
-    transform: translateY(-2px);
-    background: #754751;
-    box-shadow: 0 8px 18px #472d2626;
-  }
-  .envelope-primary:hover:not(:disabled)::after {
-    transform: translateX(130%);
-  }
-}
-@media (max-width: 800px) {
-  .stationery-scene {
-    width: min(550px, 84vw);
-  }
-}
-@media (max-width: 560px) {
-  .stationery-scene {
-    width: min(390px, 90vw);
-  }
-}
-@media (max-height: 760px) and (min-width: 561px) {
-  .stationery-scene {
-    width: min(470px, 68vw, 64vh);
-  }
-}
-@media (max-height: 700px) and (max-width: 560px) {
-  .stationery-scene {
-    width: min(86vw, 44vh);
-  }
-}
-@media (prefers-reduced-motion: reduce) {
-  .envelope-primary {
-    transition: none;
-  }
-  .envelope-primary:hover:not(:disabled) {
-    transform: none;
-  }
-  .envelope-primary::after {
-    display: none;
-  }
-}
+
+
 /* A shared monogram keeps equal capitals and an unambiguous, upright ampersand. */
-.monogram > .monogram-mark,
-.envelope-masthead > .monogram > .monogram-mark {
+.monogram > .monogram-mark {
   font-size: inherit;
   font-style: normal;
   position: static;
@@ -713,15 +422,8 @@ body {
   padding-right: 0;
   letter-spacing: 0;
 }
-.seal-inner {
-  letter-spacing: 0;
-  transform: translateY(-1px);
-}
 .dress-section .swatch > div {
   outline-color: #f1e6d3a3;
-}
-.seal-inner .monogram-mark {
-  font-size: 0.86em;
 }
 /* One classic '&' throughout the couple's names, with the initials as the reference. */
 .name-amp,
@@ -737,9 +439,6 @@ body {
 .signature .name-amp,
 .footer-names .name-amp {
   font-size: 0.68em;
-}
-.card-names > .name-amp {
-  font-size: 0.53em;
 }
 
 .hero-title-scene { display: flow-root; }
@@ -807,8 +506,6 @@ body {
   transform: translateY(0);
 }
 :is(.button, .text-button, .hero-letter-link):disabled { opacity: .6; cursor: wait; }
-.envelope-primary.button { padding: 16px 36px; gap: 0; }
-.envelope-primary.button:hover:not(:disabled) { gap: 0; }
 .memory-turn.text-button {
   --hover-shadows: 14px 14px 28px #b0b0a4, -14px -14px 28px #fafaf0;
   --accent: fuchsia;
@@ -877,8 +574,8 @@ body {
   .rsvp-intro > p { max-width: 300px; }
 }
 @media (prefers-reduced-motion: reduce) {
-  :is(.button,.text-button,.hero-letter-link):not(.memory-turn), .memory-turn.text-button { transition: none; }
-  :is(.button,.text-button,.hero-letter-link):not(.memory-turn):hover:not(:disabled), .memory-turn.text-button:active { transform: none; }
+  :is(.button,.text-button,.hero-letter-link):not(.memory-turn),.memory-turn.text-button { transition: none; }
+  :is(.button,.text-button,.hero-letter-link):not(.memory-turn):hover:not(:disabled),.memory-turn.text-button:active { transform: none; }
   :is(.button,.text-button,.hero-letter-link):not(.memory-turn)::after { display: none; }
 }
 .photo-number {
@@ -1014,66 +711,20 @@ body {
 .story-copy .demo-story-note { text-align: center; }
 .photo-tone-defs { position: absolute; pointer-events: none; }
 .story-photo-small img { filter: saturate(.6) url(#story-neutral-tone); }
-/* A larger cotton-paper envelope, with a fine scalloped edge below the structure. */
-.stationery-scene { width: min(680px, 88vw); padding-top: 40px; margin: 18px auto 24px; }
-.stationery-deckle { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; z-index: 1; pointer-events: none; filter: drop-shadow(0 2px 1px #6b542c16); }
-.stationery-address { bottom: 14%; }
-.stationery-address p { font-size: clamp(22px,3vw,32px); line-height: 1.15; }
-.envelope-heading { padding-top: 0; }
-.envelope-heading h1 { font-size: clamp(38px,4vw,56px); line-height: 1.03; margin: 4px 0 0; }
-.envelope-masthead { padding-block: 16px; }
-.envelope-actions { gap: 8px; margin-bottom: 14px; }
-.envelope-action-note:empty { display: none; }
-.envelope-colophon { padding-block: 16px; }
-.envelope-primary.button,.envelope-primary.button:hover:not(:disabled) { padding: 16px 26px; gap: 12px; align-items: center; justify-content: center; }
-.envelope-primary > svg { position: static; transform: none; flex: 0 0 auto; }
+
 :is(.button,.text-button,.hero-letter-link) { align-items: center; justify-content: center; text-align: center; }
-.seal-inner .monogram-mark > span { color: #eacb79; background: linear-gradient(125deg,#ad7732 0%,#fff0b0 35%,#d8aa51 58%,#f9e8ac 79%,#bd8a40); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent; filter: drop-shadow(0 1px 0 #48212a9c); }
-.invitation-sparkles { position: absolute; inset: 0; z-index: -1; pointer-events: none; opacity: .55; }
-.invitation-sparkles .ghost-fibers-container { pointer-events: none; }
-@media (max-height: 800px) and (min-width: 561px) {
-  .stationery-scene { width: min(580px, 80vw); padding-top: 34px; margin-top: 12px; margin-bottom: 18px; }
-  .envelope-masthead > .monogram { font-size: 44px; }
-  .envelope-heading h1 { font-size: 44px; }
-}
 @media (max-width: 800px) { .story-layout { row-gap: 100px; } }
 @media (max-width: 560px) {
-  .stationery-scene { width: min(430px,94vw); margin-top: 28px; margin-bottom: 26px; padding-top: 34px; }
-  .envelope-heading h1 { font-size: 42px; }
-  .envelope-masthead { padding-inline: 20px; }
-  .envelope-colophon { padding-block: 14px; }
   .story-photos .photo-handwritten { font-size: 20px; }
 }
-@media (max-height: 700px) and (max-width: 560px) {
-  .stationery-scene { width: min(94vw,52vh); margin-top: 20px; margin-bottom: 20px; }
-  .envelope-heading h1 { font-size: 36px; }
-}
-@media (prefers-reduced-motion: reduce) { .invitation-sparkles { display: none; } }
-
-.seal-inner { text-shadow: none; }
-.seal-inner .monogram-mark > span { background-image: linear-gradient(120deg,#d5a54c,#fff1b4 38%,#dfb85d 60%,#fff0bd 85%); text-shadow: none; filter: drop-shadow(0 1px .3px #5b292c99); }
 /* Keep the moving ivory fibers on the names/paper panel, clear of the photograph. */
 .hero-heading { isolation: isolate; }
 .hero-heading > .hero-fibers { position: absolute; inset: 0; height: auto; width: auto; z-index: 0; overflow: hidden; }
 .hero-heading > .hero-fibers .ghost-fibers-container { width: 100%; height: 100%; }
-.stationery-seal { --seal-size: clamp(66px,10.5vw,100px); width: var(--seal-size); height: var(--seal-size); left: calc(50% - var(--seal-size)/2); top: calc(50% - var(--seal-size)/2); }
-.stationery-seal .seal-inner { font-size: calc(var(--seal-size)*.32); }
-.stationery-seal .seal-inner .monogram-mark { font-size: 1em; }
-.stationery-crease-lines { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 7; pointer-events: none; }
 @media (min-width: 561px) and (max-width: 800px) {
   .hero-photo img { object-position: 50% 45%; }
 }
-/* Mobile invitation: use spare viewport height to lower the central composition. */
-@media (max-width: 560px) {
-  .envelope-heading { margin-top: clamp(12px, calc((100svh - 660px) * .22), 68px); }
-  .envelope-heading h1 { font-size: clamp(36px,10.7vw,44px); }
-}
-@media (max-width: 560px) and (max-height: 650px) {
-  .envelope-heading { margin-top: 0; }
-  .envelope-heading h1 { font-size: 34px; }
-  .stationery-scene { padding-top: 24px; margin-top: 18px; margin-bottom: 18px; }
-  .envelope-colophon { padding-block: 10px; }
-}
+
 
 /* Mobile editorial rhythm: shared gutters, readable measures and a calm heading scale. */
 @media (max-width: 560px) {
@@ -1112,8 +763,7 @@ body {
   .story-tabs { margin-top: 24px; }
   .story-copy .memory-turn { margin-top: 0; }
   .centered-heading h2 { margin: 0 0 20px; }
-  .centered-heading > p, .dress-content p, .venue-copy p, .rsvp-intro > p,
-  .wishes-heading > p { font-size: 16px; line-height: 1.75; max-width: 36ch; margin-inline: auto; }
+  .centered-heading > p, .dress-content p, .venue-copy p, .rsvp-intro > p, .wishes-heading > p { font-size: 16px; line-height: 1.75; max-width: 36ch; margin-inline: auto; }
   .schedule-layout { margin-top: 32px; gap: 36px; }
   .timeline-item { grid-template-columns: 50px 20px minmax(0, 1fr); gap: 12px; min-height: 0; padding-bottom: 28px; }
   .timeline-item:last-child { padding-bottom: 0; }

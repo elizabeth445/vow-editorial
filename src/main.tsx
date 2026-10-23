@@ -14,6 +14,7 @@ import "./styles.css";
 import "./refinement.css";
 import "./interactions.css";
 import "./readability.css";
+import "./atelier.css";
 // Keep the annotation tool and its code entirely out of production builds.
 const Agentation = import.meta.env.DEV
   ? React.lazy(() =>

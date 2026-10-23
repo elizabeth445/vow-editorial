@@ -257,7 +257,7 @@ function App() {
     initial: reduced ? false : { opacity: 0, y: 25 },
     whileInView: { opacity: 1, y: 0 },
     viewport: { once: true, amount: 0.15 },
-    transition: { duration: 0.8 },
+    transition: { duration: reduced ? 0 : 0.8 },
   } as const;
   return (
     <MotionConfig reducedMotion={reduced ? "always" : "never"}>
@@ -382,23 +382,7 @@ function App() {
                       <SplitText text={c.bride} tag="span" disabled={!opened || reduced} trigger="load" textAlign="inherit" delay={45} duration={0.9} from={{ opacity: 0, y: 26 }} to={{ opacity: 1, y: 0 }} />
                     </h1>
                   </div>
-                  <p className="hero-intro">
-                    Усе найважливіше починається
-                    <br />з простого <em>«разом»</em>
-                  </p>
-                  <div className="hero-meta">
-                    <span>{dateWithoutYearSuffix.toUpperCase()}</span>
-                    <span>РЕСТОРАН «ПРАГА» · КИЇВ</span>
-                  </div>
-                  <div className="hero-actions">
-                    <a href="#letter" className="hero-letter-link">
-                      Читати запрошення <ArrowUpRight size={17} />
-                    </a>
-                  </div>
                 </motion.div>
-                <span className="hero-handwritten">
-                  Наше спільне назавжди
-                </span>
               </div>
               <div className="hero-photo">
                 <img
@@ -425,6 +409,22 @@ function App() {
                 >
                   <ArrowDown size={19} />
                 </a>
+              </div>
+              <div className="hero-details">
+                <p className="hero-intro">
+                  Усе найважливіше починається
+                  <br />з простого <em>«разом»</em>
+                </p>
+                <div className="hero-meta">
+                  <span>{dateWithoutYearSuffix.toUpperCase()}</span>
+                  <span>РЕСТОРАН «ПРАГА» · КИЇВ</span>
+                </div>
+                <div className="hero-actions">
+                  <a href="#letter" className="hero-letter-link">
+                    Читати запрошення <ArrowUpRight size={17} />
+                  </a>
+                </div>
+                <span className="hero-handwritten">Наше спільне назавжди</span>
               </div>
             </div>
           </section>
