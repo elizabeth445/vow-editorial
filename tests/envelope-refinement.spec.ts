@@ -1,4 +1,34 @@
 import { test, expect, type Page } from "@playwright/test";
+
+test("every reload and new visit starts with a closed envelope, including returning guests", async ({ page }) => {
+  test.setTimeout(90000);
+  for (const width of [320, 390, 768, 1024, 1440]) {
+    await page.setViewportSize({ width, height: width < 600 ? 844 : 1000 });
+    for (const reducedMotion of ["no-preference", "reduce"] as const) {
+      await page.emulateMedia({ reducedMotion });
+      await page.goto("/?guest=olena#rsvp");
+      await expect(page.getByRole("dialog")).toBeVisible();
+      await page.getByRole("button", { name: "Пропустити анімацію" }).click();
+      await expect(page.getByRole("dialog")).toHaveCount(0);
+      // A legacy flag from an earlier visit must no longer bypass the invitation.
+      await page.evaluate(() => localStorage.setItem("ma-opened", "true"));
+      await page.reload();
+      await expect(page.getByRole("dialog")).toBeVisible();
+      await expect(page.locator(".invitation-overlay")).not.toHaveClass(/opening/);
+      await expect(page.locator(".site-shell")).toHaveAttribute("inert", "");
+      await expect(page.getByRole("button", { name: "Відкрити запрошення", exact: true })).toBeFocused();
+      if (reducedMotion === "no-preference") {
+        await page.screenshot({ path: `output/reopen/envelope-${width}.png` });
+      }
+      await page.getByRole("button", { name: "Пропустити анімацію" }).click();
+      await expect(page.getByRole("dialog")).toHaveCount(0);
+      await page.goto("/?guest=couple");
+      await expect(page.getByRole("dialog")).toBeVisible();
+      await expect(page.locator(".stationery-address")).toContainText("Максима");
+    }
+  }
+});
+
 type Stage = "seal" | "flap" | "rising" | "clear" | "foreground";
 async function seek(page: Page, stage: Stage) {
   await page.evaluate(
@@ -34,10 +64,6 @@ test("envelope physically clears the pocket before changing layers at every brea
   for (const width of [320, 390, 768, 1024, 1440]) {
     await page.setViewportSize({ width, height: width < 600 ? 844 : 1000 });
     await page.goto("/?guest=olena");
-    await page.evaluate(() => {
-      localStorage.removeItem("ma-opened");
-    });
-    await page.reload();
     await page.evaluate(() => document.fonts.ready);
     await expect(
       page.getByRole("button", { name: "Відкрити запрошення", exact: true }),

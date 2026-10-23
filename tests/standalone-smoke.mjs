@@ -27,6 +27,8 @@ try {
   await page.getByRole('button', { name: 'Підтвердити відповідь' }).click();
   await expect(page.getByText('До зустрічі в наш день!')).toBeVisible();
   await page.reload();
+  await expect(page.getByRole('dialog')).toBeVisible();
+  await page.getByRole('button', { name: 'Пропустити анімацію' }).click();
   await expect(page.getByText('До зустрічі в наш день!')).toBeAttached();
   for (const width of [320, 390, 768, 1024, 1440]) {
     await page.setViewportSize({ width, height: 900 });

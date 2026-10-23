@@ -6,7 +6,5 @@ export const storage={
 all():RSVPSubmission[]{try{const raw=JSON.parse(localStorage.getItem(key)||'[]');return z.array(responseSchema).parse(raw)}catch{return []}},
 get(id:string){return this.all().find(r=>r.guestId===id)},
 save(value:RSVPSubmission){const parsed=responseSchema.parse(value);localStorage.setItem(key,JSON.stringify([...this.all().filter(r=>r.guestId!==value.guestId),parsed]));},
-clear(){localStorage.removeItem(key)},
-opened(){try{return localStorage.getItem('ma-opened')==='true'}catch{return false}},
-markOpened(){try{localStorage.setItem('ma-opened','true')}catch{/* The invitation remains usable without storage. */}}
+clear(){localStorage.removeItem(key)}
 };

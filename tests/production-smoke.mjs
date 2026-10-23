@@ -24,6 +24,7 @@ try {
  await page.getByRole('button',{name:'Зберегти побажання'}).click();
  await page.getByRole('heading',{name:'Ваша зірка засяяла'}).waitFor();
  await page.reload();
+ await page.getByRole('button',{name:'Пропустити анімацію'}).click();
  await page.getByRole('button',{name:'Зірка 3: ваше побажання'}).click();
  assert.equal(await page.getByRole('textbox',{name:'Ваше побажання'}).inputValue(),'Кохання і щастя на все життя!');
  assert.deepEqual(errors,[]);

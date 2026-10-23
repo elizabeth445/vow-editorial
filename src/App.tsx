@@ -28,7 +28,6 @@ import {
   ceremonyTime,
   ceremonyWeekday,
 } from "./data/weddingConfig";
-import { storage } from "./lib/storage";
 import { downloadCalendar } from "./lib/calendar";
 import SplitText from "./components/reactbits/SplitText";
 import { NameText } from "./components/NameText";
@@ -107,7 +106,7 @@ function App() {
     guests.find(
       (g) => g.id === new URLSearchParams(location.search).get("guest"),
     ) || guests[0];
-  const [opened, setOpened] = useState(storage.opened);
+  const [opened, setOpened] = useState(false);
   const [menu, setMenu] = useState(false);
   const [rsvpKey, setRsvpKey] = useState(0);
   const reduced = useMotionPreference();
@@ -246,7 +245,6 @@ function App() {
     };
   }, [opened]);
   const open = () => {
-    storage.markOpened();
     setOpened(true);
   };
   const replay = () => {

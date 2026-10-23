@@ -71,6 +71,7 @@ test("wish validates, saves once, reloads, edits and remains separate per guest 
   await field.fill("Щастя й затишку вашому дому!");
   await page.getByRole("button", { name: "Зберегти побажання" }).click();
   await page.reload();
+  await page.getByRole("button", { name: "Пропустити анімацію" }).click();
   await page.getByRole("button", { name: "Зірка 2: ваше побажання" }).click();
   await expect(field).toHaveValue("Щастя й затишку вашому дому!");
   await page.keyboard.press("Escape");
