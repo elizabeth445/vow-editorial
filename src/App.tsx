@@ -634,16 +634,14 @@ function App() {
                     >
                       {i + 1}
                       {i + 1 === calendarInfo.day && (
-                        <svg viewBox="0 0 60 60" aria-hidden="true">
-                          <motion.path
+                        <svg className="calendar-heart" viewBox="0 0 60 60" aria-hidden="true">
+                          <path
                             d="M30 51 C23 45 5 34 5 21 C5 6 22 4 30 16 C38 4 55 6 55 21 C55 34 37 45 30 51Z"
                             fill="none"
                             stroke="currentColor"
-                            strokeWidth="1"
+                            strokeWidth="1.5"
+                            vectorEffect="non-scaling-stroke"
                             transform="rotate(-9 30 30)"
-                            initial={reduced ? false : { pathLength: 0 }}
-                            whileInView={{ pathLength: 1 }}
-                            transition={{ duration: 1.6 }}
                           />
                         </svg>
                       )}

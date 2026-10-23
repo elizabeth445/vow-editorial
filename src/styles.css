@@ -627,10 +627,15 @@ section:focus {
 }
 .wedding-day svg {
   position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
   width: 145%;
   height: 145%;
   max-width: 64px;
   max-height: 64px;
+  overflow: visible;
+  pointer-events: none;
 }
 .calendar-foot {
   display: block;
