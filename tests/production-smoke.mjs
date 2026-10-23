@@ -1,0 +1,32 @@
+import {chromium} from '@playwright/test';
+import assert from 'node:assert/strict';
+const browser=await chromium.launch({executablePath:'/Applications/Google Chrome.app/Contents/MacOS/Google Chrome'});
+try {
+ const page=await browser.newPage({viewport:{width:390,height:844},reducedMotion:'reduce'});
+ const errors=[];page.on('pageerror',e=>errors.push(e.message));
+ const response=await page.goto('http://127.0.0.1:4173/?guest=olena');
+ assert.equal(response.status(),200);
+ await page.getByRole('button',{name:'Пропустити анімацію'}).click();
+ await page.locator('.invitation-overlay').waitFor({state:'detached'});
+ assert.equal(await page.locator('#letter h2').textContent(),'Дорога Олено!');
+ assert.equal(await page.locator('.dev-tools').count(),0);
+ await page.locator('#rsvp').scrollIntoViewIfNeeded();
+ await page.getByLabel('Із радістю буду!').check();
+ await page.getByRole('button',{name:'Продовжити'}).click();
+ await page.getByRole('button',{name:'Продовжити'}).click();
+ await page.getByRole('button',{name:'Підтвердити відповідь'}).click();
+ await page.getByText('До зустрічі в наш день!').waitFor();
+ await page.locator('.ring-interaction').scrollIntoViewIfNeeded();
+ assert.equal(await page.locator('.ring-interaction').getAttribute('data-joined'),'true');
+ assert.equal(await page.locator('.ring-interaction > p').textContent(),'Дві історії — одне назавжди');
+ await page.getByRole('button',{name:'Зірка 3: залишити побажання'}).click();
+ await page.getByRole('textbox',{name:'Ваше побажання'}).fill('Кохання і щастя на все життя!');
+ await page.getByRole('button',{name:'Зберегти побажання'}).click();
+ await page.getByRole('heading',{name:'Ваша зірка засяяла'}).waitFor();
+ await page.reload();
+ await page.getByRole('button',{name:'Зірка 3: ваше побажання'}).click();
+ assert.equal(await page.getByRole('textbox',{name:'Ваше побажання'}).inputValue(),'Кохання і щастя на все життя!');
+ assert.deepEqual(errors,[]);
+ assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),true);
+ console.log('Production smoke passed: HTTP 200, personalization, RSVP, rings, wishes saved and restored, no developer panel, no JS errors, no overflow.');
+} finally {await browser.close()}

@@ -1,0 +1,576 @@
+/* A thread in the stationery margin, never across the reading column. */
+.threaded-main {
+  position: relative;
+  isolation: isolate;
+}
+.fate-thread {
+  position: absolute;
+  left: 12px;
+  z-index: 3;
+  width: 40px;
+  max-width: 40px;
+  overflow: visible;
+  pointer-events: none;
+  fill: none;
+  stroke: #9b7965;
+  stroke-width: 0.8;
+}
+.fate-ghost {
+  opacity: 0.11;
+}
+.fate-ink {
+  opacity: 0.56;
+}
+.hero,
+.letter,
+.footer {
+  position: relative;
+}
+.light-scene {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 1;
+}
+.light-scene[hidden] {
+  display: none;
+}
+.light-scene i {
+  position: absolute;
+  left: calc(8% + var(--glint) * 34%);
+  top: calc(14% + var(--glint) * 22%);
+  width: clamp(65px, 9vw, 130px);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: radial-gradient(
+    ellipse,
+    #ffe8bb30,
+    #fff5d90d 38%,
+    transparent 70%
+  );
+  animation: light-breathe calc(12s + var(--glint) * 3s) ease-in-out infinite
+    alternate;
+  animation-delay: calc(var(--glint) * -4s);
+  animation-play-state: paused;
+}
+.light-scene[data-running="true"] i {
+  animation-play-state: running;
+}
+@keyframes light-breathe {
+  from {
+    transform: translate3d(-6px, 7px, 0) scale(0.85);
+    opacity: 0.2;
+  }
+  to {
+    transform: translate3d(9px, -9px, 0) scale(1.15);
+    opacity: 0.8;
+  }
+}
+.botanical {
+  width: 95px;
+  height: 164px;
+  color: #8a876c;
+  pointer-events: none;
+}
+.letter > .botanical {
+  position: absolute;
+  left: 8%;
+  bottom: 65px;
+}
+.date-keepsake {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 48px 0 26px;
+  margin: 0 auto;
+  max-width: 520px;
+}
+.date-keepsake > .botanical {
+  position: absolute;
+  left: 2%;
+  top: 45px;
+  width: 73px;
+  height: 130px;
+}
+.ring-interaction {
+  text-align: center;
+}
+.ring-button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #6e6854;
+  border-radius: 100px 100px 10px 10px;
+  padding: 6px 16px 10px;
+}
+.ring-button svg {
+  width: 220px;
+  height: 105px;
+  overflow: visible;
+}
+.ring-button > span {
+  font-size: 12px;
+  letter-spacing: 0.8px;
+}
+.ring-interaction > p {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 27px;
+  margin: 10px 0;
+  min-height: 32px;
+}
+.secret-note {
+  position: relative;
+  display: inline-flex;
+  vertical-align: middle;
+  z-index: 5;
+}
+.secret-trigger {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  min-width: 44px;
+  color: #805d4b;
+}
+.secret-hint {
+  font-family: var(--serif);
+  font-size: 15px;
+  font-style: italic;
+  letter-spacing: 0;
+}
+.letter-ornament .secret-hint {
+  display: none;
+}
+.secret-paper {
+  position: absolute;
+  top: calc(100% + 10px);
+  left: 50%;
+  translate: -50% 0;
+  width: 260px;
+  max-width: calc(100vw - 48px);
+  padding: 25px 26px 26px;
+  background: #fbf7ed;
+  color: var(--ink);
+  border: 1px solid #d9cebd;
+  box-shadow: 0 14px 35px #34332620;
+  text-align: left;
+}
+.secret-paper::before {
+  content: "";
+  position: absolute;
+  top: -5px;
+  left: calc(50% - 5px);
+  width: 9px;
+  height: 9px;
+  background: #fbf7ed;
+  border-top: 1px solid #d9cebd;
+  border-left: 1px solid #d9cebd;
+  transform: rotate(45deg);
+}
+.secret-paper .eyebrow {
+  font-family: var(--sans);
+  font-style: normal;
+  font-size: 12px;
+  letter-spacing: 2px;
+}
+.secret-paper p {
+  font-family: var(--serif);
+  font-size: 23px;
+  line-height: 1.15;
+  margin: 12px 0 0;
+  letter-spacing: 0;
+}
+.secret-paper > button {
+  position: absolute;
+  right: 0;
+  top: 0;
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+}
+.story-copy > .secret-note {
+  margin-top: 14px;
+}
+.story-copy > .secret-note .secret-paper {
+  left: 0;
+  translate: 0;
+}
+.story-copy > .secret-note .secret-paper::before {
+  left: 20px;
+}
+.interactive-polaroid {
+  text-align: center;
+  border: 0;
+}
+.story-photo-main > .polaroid-image {
+  position: relative;
+  display: block;
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  overflow: hidden;
+  transition: transform 0.35s ease;
+}
+.polaroid-image img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.polaroid-caption {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-end;
+  padding: 26px 18px;
+  background: linear-gradient(transparent 5%, #262a25db);
+  color: #fff7e7;
+  font-family: var(--serif);
+  text-align: left;
+  font-size: 30px;
+  line-height: 1;
+  letter-spacing: 0;
+}
+.polaroid-caption small {
+  font-family: var(--sans);
+  font-size: 12px;
+  letter-spacing: 2px;
+  margin-bottom: 10px;
+}
+.story-photo-main > .polaroid-label {
+  white-space: normal;
+  font-family: var(--sans);
+  font-size: 12px;
+  letter-spacing: 1px;
+  margin-top: 14px;
+  color: #66634f;
+}
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .interactive-polaroid:hover .polaroid-image {
+    transform: perspective(600px) rotateY(-3deg) rotateX(2deg);
+  }
+}
+/* The final sky is a quiet, finite constellation rather than a particle field. */
+.wishes-section {
+  background: #303a35;
+  color: #f1e9d7;
+  padding-top: 100px;
+  padding-bottom: 65px;
+  text-align: center;
+}
+.wishes-heading {
+  max-width: 650px;
+  margin: auto;
+}
+.wishes-heading .eyebrow {
+  color: #c6bda8;
+}
+.wishes-heading h2 {
+  font-size: clamp(49px, 5.4vw, 78px);
+  line-height: 1.02;
+  margin: 24px 0;
+}
+.wishes-heading h2 em {
+  color: #d6c4a1;
+  font-weight: 400;
+}
+.wishes-heading > p {
+  font-size: 12px;
+  line-height: 1.8;
+  max-width: 390px;
+  margin: auto;
+  color: #d0d3c7;
+}
+.wish-constellation {
+  position: relative;
+  width: 100%;
+  max-width: 1000px;
+  height: 210px;
+  margin: 25px auto 10px;
+  color: #dac59a;
+}
+.wish-constellation > svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.45;
+}
+.wish-star {
+  position: absolute;
+  width: 48px;
+  height: 64px;
+  transform: translate(-50%, -19px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  border-radius: 40px;
+  transition:
+    color 0.2s,
+    background 0.2s;
+}
+.wish-star > svg {
+  width: 38px;
+  height: 38px;
+  transition: transform 0.3s;
+}
+.wish-star > span {
+  font-size: 12px;
+  letter-spacing: 1px;
+  color: #c9c5b4;
+}
+.wish-star.is-saved > svg {
+  filter: drop-shadow(0 0 8px #e7cc8e85);
+  fill: #d8b46b1c;
+}
+.wish-star:hover > svg,
+.wish-star[aria-expanded="true"] > svg {
+  transform: scale(1.13);
+}
+.wish-star[aria-expanded="true"] {
+  background: #ffffff0a;
+}
+.wish-paper {
+  position: relative;
+  width: 100%;
+  max-width: 480px;
+  margin: 0 auto 30px;
+  text-align: left;
+  background: #f6f0e5;
+  color: var(--ink);
+  padding: 35px 35px 30px;
+  box-shadow: 0 20px 55px #101a1529;
+  border-top: 2px solid #c2a772;
+}
+.wish-paper h3 {
+  font-family: var(--serif);
+  font-size: 36px;
+  line-height: 1.05;
+  margin: 15px 0 25px;
+  font-weight: 400;
+}
+.wish-paper label {
+  display: block;
+  font-size: 12px;
+  margin-bottom: 9px;
+}
+.wish-paper textarea {
+  display: block;
+  resize: vertical;
+  min-height: 110px;
+  width: 100%;
+  border: 1px solid #bdb4a4;
+  border-radius: 0;
+  background: #fffcf6;
+  color: var(--ink);
+  font-family: var(--sans);
+  padding: 12px;
+  font-size: 16px;
+  line-height: 1.5;
+}
+.wish-field-meta {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  font-size: 12px;
+  color: #666354;
+  margin: 9px 0 20px;
+}
+.wish-paper .button {
+  width: 100%;
+  justify-content: space-between;
+  font-size: 12px;
+  padding: 17px 18px;
+}
+.wish-close {
+  position: absolute;
+  top: 3px;
+  right: 3px;
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+}
+.wish-error {
+  color: #883c40;
+  font-size: 12px;
+  line-height: 1.6;
+  margin: -4px 0 16px;
+}
+.wish-success {
+  text-align: center;
+}
+.wish-success > svg {
+  color: #586546;
+}
+.wish-success > h3 {
+  margin-bottom: 16px;
+}
+.wish-success > p {
+  font-family: var(--serif);
+  font-size: 26px;
+  line-height: 1.25;
+  overflow-wrap: anywhere;
+  white-space: pre-wrap;
+}
+.wish-success > span {
+  display: block;
+  font-size: 12px;
+  line-height: 1.6;
+  color: #696554;
+  margin: 20px 0 12px;
+}
+.wish-success > .text-button {
+  margin: 12px auto 0;
+}
+.wishes-privacy {
+  max-width: 480px;
+  margin: 20px auto 0;
+  color: #c1c9bd;
+  font-size: 12px;
+  line-height: 1.8;
+}
+@media (max-width: 800px) {
+  .fate-thread {
+    left: -5px;
+    width: 23px;
+  }
+  .letter > .botanical {
+    left: 4%;
+    bottom: 25px;
+    width: 54px;
+    height: 96px;
+  }
+  .date-keepsake {
+    padding-top: 34px;
+  }
+  .date-keepsake > .botanical {
+    left: 0;
+    width: 50px;
+    height: 90px;
+  }
+  .wishes-section {
+    padding-top: 70px;
+    padding-bottom: 45px;
+  }
+}
+@media (max-width: 560px) {
+  .wishes-heading h2 {
+    font-size: clamp(39px, 11.3vw, 57px);
+    margin: 20px 0;
+  }
+  .wishes-heading > p {
+    font-size: 12px;
+    max-width: 280px;
+  }
+  .wish-constellation {
+    height: 175px;
+    margin-top: 32px;
+  }
+  .wish-star {
+    width: 44px;
+    height: 64px;
+  }
+  .wish-star > svg {
+    width: 30px;
+    height: 30px;
+  }
+  .wish-paper {
+    padding: 30px 20px 25px;
+  }
+  .wish-paper h3 {
+    font-size: 30px;
+    max-width: 210px;
+  }
+  .wish-field-meta {
+    font-size: 12px;
+  }
+  .polaroid-caption {
+    font-size: 27px;
+    padding: 18px 14px 35px;
+  }
+  .story-photo-main > .polaroid-label {
+    font-size: 12px;
+    letter-spacing: 0.6px;
+    margin-top: 12px;
+  }
+  .letter > .botanical {
+    left: 1%;
+    bottom: 18px;
+    width: 38px;
+    height: 70px;
+  }
+  .ring-button svg {
+    width: 190px;
+  }
+  .ring-interaction > p {
+    font-size: 24px;
+  }
+  .date-keepsake > .botanical {
+    left: -3px;
+    top: 52px;
+    width: 40px;
+    height: 75px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .light-scene {
+    display: none;
+  }
+  .light-scene i {
+    animation: none;
+  }
+  .polaroid-image,
+  .wish-star,
+  .wish-star > svg {
+    transition: none;
+  }
+}
+/* The foreground Polaroid must not cover the memory on the larger print. */
+.polaroid-caption {
+  justify-content: flex-start;
+  padding-top: 30px;
+  background: linear-gradient(#262a25c9, #262a2529 80%);
+}
+@media (max-width: 800px) {
+  .fate-thread {
+    left: 0;
+    width: 16px;
+  }
+}
+
+@media (max-width: 560px) {
+  .wish-star {
+    transform: translate(-50%, -15px);
+  }
+}
+
+/* Keep every printed caption in the uncovered part of the overlapping frame. */
+.story-photo-main > .polaroid-label {
+  position: absolute;
+  bottom: 10px;
+  left: 12px;
+  width: 44%;
+  margin: 0;
+  text-align: left;
+  line-height: 1.3;
+}
+.wish-paper {
+  scroll-margin-top: 110px;
+  scroll-margin-bottom: 30px;
+}
+@media (max-width: 560px) {
+  .photo-handwritten {
+    bottom: -25px;
+    font-size: 19px;
+    max-width: 100%;
+  }
+}

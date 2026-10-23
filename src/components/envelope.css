@@ -1,0 +1,613 @@
+/* A flat layer stack keeps the card behind the pocket. Perspective belongs only to the lid. */
+.invitation-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  background: #eae5d9;
+  background-image: radial-gradient(
+    ellipse at 50% 35%,
+    #faf7ef 0,
+    transparent 70%
+  );
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: auto;
+  overscroll-behavior: contain;
+  isolation: isolate;
+  padding-bottom: env(safe-area-inset-bottom);
+}
+.envelope-masthead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  width: 100%;
+  padding: 22px 4.5vw;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 20;
+}
+.envelope-masthead > span:nth-child(2) {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 12px;
+  letter-spacing: 2.4px;
+  color: #706a5b;
+}
+.envelope-skip {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+  min-height: 40px;
+  font-size: 12px;
+  color: #686052;
+  padding: 8px 0;
+  border-bottom: 1px solid #b9ad98;
+}
+.envelope-heading {
+  text-align: center;
+  padding: 8px 24px 0;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 0;
+}
+.envelope-heading > .eyebrow {
+  font-size: 12px;
+  letter-spacing: 2px;
+  color: #785555;
+}
+.envelope-heading h1 {
+  font-size: clamp(38px, 4.7vw, 66px);
+  line-height: 1.04;
+  letter-spacing: -1.8px;
+  margin: 20px 0 15px;
+}
+.envelope-heading h1 em {
+  font-weight: 400;
+  color: var(--wine);
+}
+.envelope-heading p {
+  font-size: 12px;
+  color: #746d5e;
+}
+.stationery-scene {
+  width: min(540px, 77vw);
+  position: relative;
+  padding-top: 50px;
+  flex-shrink: 0;
+  margin: 30px auto 14px;
+  isolation: isolate;
+}
+.stationery-assembly {
+  aspect-ratio: 1.62;
+  position: relative;
+  isolation: isolate;
+}
+.stationery-back {
+  position: absolute;
+  inset: 0;
+  background: #d5c7af;
+  border-radius: 3px;
+  z-index: 2;
+  box-shadow:
+    0 23px 45px #4b402529,
+    0 2px 5px #6351381a;
+}
+.stationery-lining {
+  position: absolute;
+  inset: 3px 3px 4px;
+  z-index: 2;
+  background:
+    repeating-linear-gradient(
+      45deg,
+      #bca98b13 0px,
+      #bca98b13 1px,
+      transparent 1px,
+      transparent 6px
+    ),
+    #e2d7c3;
+  box-shadow: inset 0 8px 16px #6753351a;
+}
+.stationery-flap-layer {
+  position: absolute;
+  inset: 0;
+  z-index: 8;
+  perspective: 1300px;
+  pointer-events: none;
+}
+.stationery-flap {
+  position: absolute;
+  inset: 0 0 auto;
+  height: 60%;
+  transform-origin: 50% 0%;
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+.stationery-flap-face {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+.stationery-flap-face.outside {
+  background: linear-gradient(175deg, #f0e7d6, #e6dac3);
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
+  transform: translateZ(0.3px);
+}
+.stationery-flap-face.inside {
+  background:
+    repeating-linear-gradient(
+      45deg,
+      #bba88a15 0px,
+      #bba88a15 1px,
+      transparent 1px,
+      transparent 6px
+    ),
+    linear-gradient(#d9cdb7, #e7ddcb);
+  clip-path: polygon(50% 0, 100% 100%, 0 100%);
+  transform: rotateX(180deg) translateZ(0.3px);
+}
+.stationery-pocket {
+  position: absolute;
+  inset: 0;
+  clip-path: polygon(0 0, 50% 55%, 100% 0, 100% 100%, 0 100%);
+  background: linear-gradient(140deg, #e7dbc3, #e2d4ba);
+  z-index: 5;
+  border-radius: 2px;
+}
+.stationery-fold {
+  position: absolute;
+  inset: 0;
+  z-index: 6;
+  pointer-events: none;
+}
+.stationery-fold.fold-left {
+  clip-path: polygon(0 0, 50.1% 55%, 0 100%);
+  background: linear-gradient(35deg, #eee4cf, #e4d7bb);
+  filter: drop-shadow(1px 1px 1px #6a57361a);
+}
+.stationery-fold.fold-right {
+  clip-path: polygon(100% 0, 49.9% 55%, 100% 100%);
+  background: linear-gradient(-35deg, #e7dbc3, #e0d0b1);
+  filter: drop-shadow(-1px 1px 1px #6a573618);
+}
+.stationery-pocket-grain,
+.stationery-flap-face:after,
+.stationery-fold:after,
+.stationery-card:after {
+  position: absolute;
+  content: "";
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.065;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.87' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' opacity='.7' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+.stationery-card-carrier {
+  position: absolute;
+  inset: 6% 6% 8%;
+  z-index: 3;
+  will-change: transform;
+}
+.stationery-card {
+  position: relative;
+  height: 100%;
+  background: #faf6eb;
+  outline: 1px solid #bbad90;
+  outline-offset: -11px;
+  border: 1px solid #ded2b9;
+  box-shadow: 0 4px 14px #46331b12;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  transform-origin: 50% 60%;
+}
+.card-rule {
+  position: absolute;
+  inset: 16px;
+  border: 1px solid #d9cbb180;
+  pointer-events: none;
+}
+.card-kicker {
+  font-size: 12px;
+  letter-spacing: 2.3px;
+  color: #84745c;
+}
+.card-names {
+  font-family: var(--serif);
+  font-size: clamp(30px, 3vw, 44px);
+  line-height: 0.9;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 16px 0 17px;
+  color: #524d3e;
+}
+.card-names i {
+  font-size: 0.57em;
+  font-weight: 400;
+  color: var(--wine);
+  margin: 5px 0;
+}
+.card-date {
+  font-size: 12px;
+  letter-spacing: 2px;
+  color: #706148;
+}
+.card-place {
+  font-size: 12px;
+  letter-spacing: 1.5px;
+  color: #91836b;
+  margin-top: 9px;
+}
+.card-flourish {
+  font-family: var(--serif);
+  color: #98715a;
+  font-size: 23px;
+  line-height: 1;
+  margin-top: 12px;
+}
+.stationery-address {
+  position: absolute;
+  bottom: 7%;
+  inset-inline: 15px;
+  z-index: 7;
+  text-align: center;
+  pointer-events: none;
+}
+.stationery-address > span {
+  font-size: 12px;
+  letter-spacing: 2.4px;
+  color: #8d7a59;
+}
+.stationery-address p {
+  font-family: var(--serif);
+  font-size: 28px;
+  line-height: 1.2;
+  margin-top: 6px;
+  color: #6b5c45;
+}
+.stationery-seal {
+  position: absolute;
+  left: calc(50% - 37px);
+  top: calc(56% - 37px);
+  z-index: 10;
+  width: 74px;
+  height: 74px;
+  border-radius: 45% 49% 43% 47%;
+  border: 2px solid #aa6d63;
+  background: radial-gradient(circle at 34% 24%, #a16860, #7c4545 66%, #643b3b);
+  box-shadow:
+    0 5px 9px #3e211f3b,
+    inset 0 2px 3px #e4ae855e,
+    inset 0 -2px 3px #3a1d1b60;
+  display: grid;
+  place-content: center;
+}
+.stationery-seal:before {
+  content: "";
+  position: absolute;
+  inset: 7px;
+  border-radius: 50%;
+  border: 1px solid #c38c714f;
+  box-shadow:
+    inset 1px 1px 2px #3c1d1c70,
+    1px 1px 1px #ce97763b;
+}
+.seal-inner {
+  font-family: var(--serif);
+  font-size: 30px;
+  letter-spacing: -3px;
+  line-height: 1;
+  color: #d1ac86;
+  transform: rotate(-9deg);
+  text-shadow:
+    0 -1px 1px #3d211e,
+    0 1px #c99171;
+}
+.seal-inner i {
+  font-size: 18px;
+  font-weight: 400;
+  margin-right: 2px;
+}
+.stationery-seal:disabled {
+  cursor: default;
+}
+.stationery-shadow {
+  height: 22px;
+  width: 88%;
+  margin: 15px auto 0;
+  background: radial-gradient(ellipse, #5d4e3136, transparent 70%);
+  filter: blur(8px);
+  border-radius: 50%;
+}
+.envelope-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  position: relative;
+  z-index: 12;
+  margin: 0 20px 25px;
+  flex-shrink: 0;
+}
+.envelope-primary {
+  min-width: 250px;
+  min-height: 52px;
+  font-size: 12px;
+  padding: 17px 23px;
+}
+.envelope-action-note {
+  font-size: 12px;
+  color: #79705e;
+  letter-spacing: 0.4px;
+  min-height: 14px;
+}
+.envelope-colophon {
+  display: flex;
+  justify-content: space-between;
+  gap: 25px;
+  font-size: 12px;
+  letter-spacing: 1.6px;
+  width: 100%;
+  padding: 24px 4.5vw;
+  margin-top: auto;
+  color: #766b58;
+  flex-shrink: 0;
+}
+@media (min-height: 1000px) {
+  .envelope-heading {
+    padding-top: 4vh;
+  }
+  .stationery-scene {
+    margin-top: 50px;
+    margin-bottom: 30px;
+  }
+}
+@media (max-width: 800px) {
+  .envelope-masthead {
+    padding: 18px 26px;
+  }
+  .envelope-masthead > span:nth-child(2) {
+    display: none;
+  }
+  .envelope-heading {
+    padding-top: 18px;
+  }
+  .envelope-heading h1 {
+    font-size: 54px;
+  }
+  .stationery-scene {
+    width: min(500px, 78vw);
+    margin-top: 35px;
+  }
+  .card-names {
+    font-size: 42px;
+  }
+  .envelope-colophon {
+    padding-inline: 26px;
+    font-size: 12px;
+    letter-spacing: 1px;
+  }
+}
+@media (max-width: 560px) {
+  .envelope-masthead {
+    padding: 13px 21px;
+  }
+  .envelope-skip {
+    font-size: 12px;
+    gap: 8px;
+  }
+  .envelope-heading {
+    padding: 26px 20px 0;
+  }
+  .envelope-heading > .eyebrow {
+    font-size: 12px;
+    letter-spacing: 1.3px;
+  }
+  .envelope-heading h1 {
+    font-size: 42px;
+    letter-spacing: -1px;
+    margin: 19px 0 16px;
+  }
+  .envelope-heading p {
+    font-size: 12px;
+    max-width: 230px;
+    margin: auto;
+  }
+  .stationery-scene {
+    width: 85vw;
+    padding-top: 38px;
+    margin-top: 46px;
+    margin-bottom: 8px;
+  }
+  .stationery-address p {
+    font-size: 23px;
+  }
+  .stationery-address > span {
+    font-size: 12px;
+    letter-spacing: 1.4px;
+  }
+  .stationery-seal {
+    width: 54px;
+    height: 54px;
+    left: calc(50% - 27px);
+    top: calc(56% - 27px);
+  }
+  .seal-inner {
+    font-size: 24px;
+  }
+  .seal-inner i {
+    font-size: 15px;
+  }
+  .stationery-seal:before {
+    inset: 5px;
+  }
+  .stationery-card {
+    padding: 13px;
+    outline-offset: -7px;
+  }
+  .card-rule {
+    inset: 10px;
+  }
+  .card-kicker {
+    font-size: 12px;
+    letter-spacing: 1.5px;
+  }
+  .card-names {
+    font-size: 31px;
+    margin: 10px 0 11px;
+  }
+  .card-names i {
+    margin: 3px 0;
+  }
+  .card-date {
+    font-size: 12px;
+    letter-spacing: 1.3px;
+  }
+  .card-place {
+    font-size: 12px;
+    letter-spacing: 0.8px;
+    margin-top: 7px;
+  }
+  .card-flourish {
+    font-size: 17px;
+    margin-top: 7px;
+  }
+  .envelope-actions {
+    margin-top: 10px;
+    gap: 14px;
+  }
+  .envelope-primary {
+    min-width: 238px;
+    font-size: 12px;
+    min-height: 49px;
+  }
+  .envelope-action-note {
+    font-size: 12px;
+    letter-spacing: 0.1px;
+  }
+  .envelope-colophon {
+    font-size: 12px;
+    letter-spacing: 0.8px;
+    padding: 22px;
+    line-height: 1.8;
+  }
+  .envelope-colophon > span {
+    max-width: 45%;
+  }
+  .envelope-colophon > span + span {
+    text-align: right;
+  }
+}
+@media (max-width: 360px) {
+  .envelope-heading h1 {
+    font-size: 36px;
+  }
+  .envelope-heading > .eyebrow {
+    font-size: 12px;
+  }
+  .envelope-heading {
+    padding-top: 20px;
+  }
+  .stationery-scene {
+    margin-top: 50px;
+    width: 84vw;
+  }
+  .stationery-address p {
+    font-size: 20px;
+  }
+  .stationery-seal {
+    width: 48px;
+    height: 48px;
+    left: calc(50% - 24px);
+    top: calc(56% - 24px);
+  }
+  .seal-inner {
+    font-size: 22px;
+  }
+  .card-names {
+    font-size: 27px;
+  }
+  .card-kicker {
+    font-size: 12px;
+  }
+  .card-flourish {
+    font-size: 13px;
+    margin-top: 5px;
+  }
+}
+@media (max-height: 760px) and (min-width: 561px) {
+  .envelope-masthead {
+    padding-block: 10px;
+  }
+  .envelope-heading {
+    padding-top: 0;
+  }
+  .envelope-heading h1 {
+    font-size: 43px;
+    margin-top: 12px;
+    margin-bottom: 9px;
+  }
+  .envelope-heading p {
+    font-size: 12px;
+  }
+  .stationery-scene {
+    width: 410px;
+    max-width: 65vw;
+    padding-top: 35px;
+    margin-top: 20px;
+    margin-bottom: 0;
+  }
+  .card-names {
+    font-size: 32px;
+    margin: 12px 0;
+  }
+  .envelope-primary {
+    min-height: 45px;
+    padding-block: 12px;
+  }
+  .envelope-actions {
+    margin-top: 0;
+    margin-bottom: 10px;
+    gap: 10px;
+  }
+  .envelope-colophon {
+    padding-block: 15px;
+  }
+}
+@media (max-height: 700px) and (max-width: 560px) {
+  .envelope-heading {
+    padding-top: 6px;
+  }
+  .envelope-heading h1 {
+    font-size: 35px;
+    margin-block: 13px;
+  }
+  .stationery-scene {
+    margin-top: 25px;
+    width: 80vw;
+    padding-top: 26px;
+  }
+  .envelope-colophon {
+    padding-block: 15px;
+  }
+  .envelope-masthead {
+    padding-block: 8px;
+  }
+  .envelope-actions {
+    margin-top: 0;
+    margin-bottom: 10px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .stationery-flap,
+  .stationery-card-carrier {
+    will-change: auto;
+  }
+}
