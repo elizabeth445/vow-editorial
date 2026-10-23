@@ -33,6 +33,7 @@ import SplitText from "./components/reactbits/SplitText";
 import { NameText } from "./components/NameText";
 import { MonogramMark } from "./components/Monogram";
 import { Envelope } from "./components/Envelope";
+import { CalendarDate } from "./components/CalendarDate";
 import { RSVP } from "./components/RSVP";
 import { DevPanel } from "./components/DevPanel";
 import {
@@ -623,28 +624,11 @@ function App() {
                   {Array.from({ length: calendarInfo.offset }, (_, i) => (
                     <span key={"blank" + i} />
                   ))}
-                  {Array.from({ length: calendarInfo.days }, (_, i) => (
-                    <span
-                      key={i}
-                      className={
-                        i + 1 === calendarInfo.day ? "wedding-day" : ""
-                      }
-                    >
-                      {i + 1}
-                      {i + 1 === calendarInfo.day && (
-                        <svg className="calendar-heart" viewBox="0 0 60 60" aria-hidden="true">
-                          <path
-                            d="M30 51 C23 45 5 34 5 21 C5 6 22 4 30 16 C38 4 55 6 55 21 C55 34 37 45 30 51Z"
-                            fill="none"
-                            stroke="currentColor"
-                            strokeWidth="1.5"
-                            vectorEffect="non-scaling-stroke"
-                            transform="rotate(-9 30 30)"
-                          />
-                        </svg>
-                      )}
-                    </span>
-                  ))}
+                  {Array.from({ length: calendarInfo.days }, (_, i) =>
+                    i + 1 === calendarInfo.day ? (
+                      <CalendarDate key={i} day={i + 1} active={opened} />
+                    ) : <span key={i}>{i + 1}</span>,
+                  )}
                 </div>
                 <span className="calendar-foot">НАША УЛЮБЛЕНА ДАТА ♡</span>
               </div>
